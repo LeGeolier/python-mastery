@@ -78,7 +78,24 @@ class RowSlot:
         self.rides = rides
 
 
+from collections import namedtuple
+
+RowTuple = namedtuple("RowTuple", ["route", "date", "daytype", "rides"])
+
+
 import csv
+
+
+def read_namedtuples(filename):
+    # Memory used : ~120Mb
+    records = []
+    with open(filename) as f:
+        rows = csv.reader(f)
+        _ = next(rows)  # Skip headers
+        for row in rows:
+            tupledRow = RowTuple(row[0], row[1], row[2], int(row[3]))
+            records.append(tupledRow)
+    return records
 
 
 def read_tuples(filename):
@@ -142,7 +159,7 @@ if __name__ == "__main__":
     import tracemalloc
 
     tracemalloc.start()
-    rows = read_slots("../Data/ctabus.csv")
+    rows = read_namedtuples("../Data/ctabus.csv")
     print("Memory Use : Current %d, Peak %d" % tracemalloc.get_traced_memory())
     # Resulted around 114Mb
 
