@@ -58,9 +58,9 @@ from Ex2_1 import read_dict
 
 rows = read_dict("../Data/ctabus.csv")
 # 1. How many bus routes exist in Chicago
-routes = set()
+""" routes = set()
 for row in rows:
-    routes.add(row["route"])
+    routes.add(row["route"]) """
 
 """ print(routes)
 print(len(routes)) """
@@ -75,12 +75,21 @@ print(len(routes)) """
 # 3. What is the total number of rides taken on each bus route
 from collections import Counter
 
-myCount = Counter
+myCount = Counter()
 for row in rows:
-    if myCount[row["route"]]:
-        myCount[row["route"]] += 1
-    else:
-        myCount[row["route"]] = 0
-print(myCount)
+    myCount[row["route"]] += row["rides"]
+
+print(myCount.most_common(5))
 
 # 4. What five bus routes had the greatest ten-year icrease in ridership from 2001 to 2011
+# Copied from the solutions
+from collections import defaultdict
+
+rides_by_year = defaultdict(Counter)
+for row in rows:
+    year = row["date"].split("/")[2]
+    rides_by_year[year][row["route"]] += row["rides"]
+
+diffs = rides_by_year["2011"] - rides_by_year["2001"]
+for route, diff in diffs.most_common(5):
+    print(route, diff)
