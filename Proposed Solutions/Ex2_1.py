@@ -28,23 +28,25 @@ print(f"Peak : {peak}") # ~40Mb
 
 # import csv
 
+from Ex2_5 import RideData
 
-# def read_rides_as_tuples(filename):
-#     """
-#     Read the bus ride data as a list of tuples
-#     """
-#     records = []
-#     with open(filename) as f:
-#         rows = csv.reader(f)
-#         _ = next(rows)
-#         for row in rows:
-#             route = row[0]
-#             date = row[1]
-#             daytype = row[2]
-#             rides = int(row[3])
-#             record = (route, date, daytype, rides)
-#             records.append(record)
-#     return records
+
+def read_rides_as_tuples(filename):
+    """
+    Read the bus ride data as a list of tuples
+    """
+    records = RideData()
+    with open(filename) as f:
+        rows = csv.reader(f)
+        _ = next(rows)
+        for row in rows:
+            route = row[0]
+            date = row[1]
+            daytype = row[2]
+            rides = int(row[3])
+            record = (route, date, daytype, rides)
+            records.append(record)
+    return records
 
 
 # if __name__ == "__main__":
@@ -78,9 +80,9 @@ class RowSlot:
         self.rides = rides
 
 
-from collections import namedtuple
+# from collections import namedtuple
 
-RowTuple = namedtuple("RowTuple", ["route", "date", "daytype", "rides"])
+# RowTuple = namedtuple("RowTuple", ["route", "date", "daytype", "rides"])
 
 
 import csv
@@ -155,13 +157,13 @@ def read_slots(filename):
     return records
 
 
-if __name__ == "__main__":
-    import tracemalloc
+# if __name__ == "__main__":
+#     import tracemalloc
 
-    tracemalloc.start()
-    rows = read_namedtuples("../Data/ctabus.csv")
-    print("Memory Use : Current %d, Peak %d" % tracemalloc.get_traced_memory())
-    # Resulted around 114Mb
+#     tracemalloc.start()
+#     rows = read_namedtuples("../Data/ctabus.csv")
+#     print("Memory Use : Current %d, Peak %d" % tracemalloc.get_traced_memory())
+#     # Resulted around 114Mb
 
 """ 
 Seems like the best option is using slots
