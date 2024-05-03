@@ -33,7 +33,7 @@ def print_portfolio(portfolio):
         print("%10s %10d %10.2f" % (row.name, row.shares, row.price))
 
 
-portfolio = read_portfolio("Data/portfolio.csv")
-for s in portfolio:
-    print(repr(s))
-print_portfolio(portfolio=portfolio)
+# portfolio = read_portfolio("Data/portfolio.csv")
+# for s in portfolio:
+#     print(repr(s))
+# print_portfolio(portfolio=portfolio)
