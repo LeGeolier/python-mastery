@@ -14,7 +14,7 @@ class Stock:
 
     @classmethod
     def from_row(cls, row):
-        values = [func(val) for func, val in zip(cls.types, row)]
+        values = [func(val) for func, val in zip(cls._types, row)]
         return cls(*values)
 
     @property
@@ -23,7 +23,7 @@ class Stock:
 
     @property
     def shares(self):
-        return self.shares
+        return self._shares
 
     @shares.setter
     def shares(self, val):
@@ -35,7 +35,7 @@ class Stock:
 
     @property
     def price(self):
-        return self.price
+        return self._price
 
     @price.setter
     def price(self, val):
