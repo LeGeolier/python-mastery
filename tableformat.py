@@ -53,10 +53,3 @@ def create_formatter(name):
     if name == "csv":
         return CSVTableFormatter()
     raise RuntimeError("Unknown format %s" % name)
-
-
-import reader
-
-portfolio = reader.read_csv_as_instances("Data/portfolio.csv", stock.Stock)
-formatter = create_formatter("text")
-print_table(portfolio, ["name", "shares", "price"], formatter)

@@ -1,5 +1,5 @@
 # stock.py
-import csv
+import sys
 from decimal import Decimal
 
 
@@ -48,9 +48,30 @@ class Stock:
     def sell(self, nshares):
         self.shares -= nshares
 
+    def __repr__(self) -> str:
+        return f"Stock({self.name}, {self._shares}, {self._price})"
+
+    def __eq__(self, other) -> bool:
+        return isinstance(other, Stock) and (
+            (self.name, self._shares, self.price)
+            == (other.name, other._shares, other._price)
+        )
+
 
 class DStock(Stock):
     _types = (str, int, Decimal)
+
+
+class redirect_stdout:
+    def __init__(self, out_file):
+        self.out_file = out_file
+
+    def __enter__(self):
+        self.stdout = sys.stdout
+        sys.stdout = self.out_file
+
+    def __exit__(self, ty, val, tb):
+        sys.stdout = self.stdout
 
 
 def print_portfolio(portfolio):
