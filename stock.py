@@ -79,3 +79,13 @@ def print_portfolio(portfolio):
     print(("-" * 10 + " ") * 3)
     for row in portfolio:
         print("%10s %10d %10.2f" % (row.name, row.shares, row.price))
+
+
+class SimpleStock:
+    def __init__(self, name, shares, price):
+        self.name = name
+        self.shares = shares
+        self.price = price
+
+    def cost(self):
+        return self.shares * self.price
